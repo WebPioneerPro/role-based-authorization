@@ -1,0 +1,218 @@
+<div class="wrapper py-3">
+  <h3 style="color: #043b5c; font-size: 1.5rem;">Manage Users</h3>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/home/dashboard">Home</a></li>
+      <li class="breadcrumb-item active">Manage Users</li>
+    </ol>
+  </nav>
+  <div class="card">
+    <div class="mat-elevation-z8">
+      <div class="above-table d-flex justify-content-between px-4 align-items-center">
+        <div class="button-container me-2">
+          <button mat-flat-button color="primary" aria-label="Example icon button with a delete icon" title="Add User"
+            data-bs-toggle="modal" data-bs-target="#addModal">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+              class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+              <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+              <path fill-rule="evenodd"
+                d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5" />
+            </svg>
+            <span>&nbsp; Add User</span>
+          </button>
+        </div>
+        <mat-form-field appearance="outline" class="full-width pt-3">
+          <input matInput (keyup)="applyFilter($event)" placeholder="Search..." #input />
+        </mat-form-field>
+      </div>
+      <div class="table-responsive">
+        <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+          <!-- EmployeeID Column -->
+          <ng-container matColumnDef="employeeID">
+            <th mat-header-cell *matHeaderCellDef> EID. </th>
+            <td mat-cell *matCellDef="let user" class="py-4"> {{user.id}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name"> Name </th>
+            <td mat-cell *matCellDef="let user">
+              <img src="{{ user.profilePic }}" class="rounded-circle mt-2" width="45" height="45"
+                style="object-fit: cover; object-position: top;">
+              <div class="user-details d-inline-flex px-2 flex-column justify-content-center">
+                <span>{{user.name | titlecase}}</span>
+                <p style="font-size: smaller; color: gray;">{{user.email | lowercase}}</p>
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Branch Column -->
+          <ng-container matColumnDef="branch">
+            <th mat-header-cell *matHeaderCellDef> Branch </th>
+            <td mat-cell *matCellDef="let user"> {{user.branch | uppercase}} </td>
+          </ng-container>
+
+          <!-- Role Column -->
+          <ng-container matColumnDef="role">
+            <th mat-header-cell *matHeaderCellDef> Role </th>
+            <td mat-cell *matCellDef="let user"> {{user.role | titlecase}} </td>
+          </ng-container>
+
+          <!-- Status Column -->
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef> Status </th>
+            <td mat-cell *matCellDef="let user">
+              @if (user.status) {
+              <span class="badge rounded-pill text-bg-success">Active</span>
+              }
+              @else {
+              <span class="badge rounded-pill text-bg-danger">Inactive</span>
+              }
+            </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let user">
+              <button mat-icon-button color="primary" aria-label="icon button with a edit icon" data-bs-toggle="modal"
+                data-bs-target="#editModal" (click)="editUser(user)" title="Edit User">
+                <mat-icon><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-pencil-square" viewBox="0 0 16 16">
+                    <path
+                      d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                    <path fill-rule="evenodd"
+                      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                  </svg></mat-icon>
+              </button>
+              <button mat-icon-button color="warn" aria-label="icon button with a delete icon" data-bs-toggle="modal"
+                data-bs-target="#deleteModal" (click)="editUser(user)" title="Delete User">
+                <mat-icon><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-x-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                    <path
+                      d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                  </svg></mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+  </div>
+
+  <!-- MODAlS -->
+
+
+  <!-- Edit Modal -->
+  <div class="modal fade" id="editModal" tabindex="-1" *ngIf="userData">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="editModalLabel">Edit Employee Information (ID : {{ userData.id }})</h1>
+        </div>
+        <form id="editForm" ngForm (ngSubmit)="onSubmit()" #editForm="ngForm">
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="email" class="form-label">Role</label>
+              <select class="form-select" name="role" [(ngModel)]="userData.role">
+                <option value="not assigned" *ngIf="userData.role === 'not assigned'">--Choose--</option>
+                <option value="{{role}}" *ngFor="let role of userRoles">{{ role | titlecase }}</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="branch" class="form-label">Branch</label>
+              <select class="form-select" name="branch" [(ngModel)]="userData.branch">
+                <option value="not specified" *ngIf="userData.branch === 'not specified'">--Choose--</option>
+                <option value="{{branch}}" *ngFor="let branch of companyBranches"> {{ branch | uppercase}}</option>
+              </select>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="statusCheck" (change)="onStatusChange()"
+                [checked]="userData.status">
+              <label class="form-check-label" for="statusCheck">
+                Is Active?
+              </label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary rounded-pill" data-bs-dismiss="modal">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- delete Modal -->
+
+  <div class="modal fade" id="deleteModal" tabindex="-1" *ngIf="userData">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="deleteModalLabel">Delete User?</h1>
+        </div>
+        <div class="modal-body">
+          This will delete user with ID: {{ userData.id }}.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-danger rounded-pill" data-bs-dismiss="modal"
+            (click)="onDeleteUser()">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Modal -->
+  <div class="modal fade" id="addModal" tabindex="-1" *ngIf="userData">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="editModalLabel">Add Employee Information</h1>
+        </div>
+        <form id="addForm" ngForm (ngSubmit)="onAddUser()" #addForm="ngForm" class="container container-fluid">
+          <div class="modal-body row g-3">
+            <div class="col-md-6">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" name="name" ngModel required>
+            </div>
+            <div class="col-md-6">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" name="email" ngModel required email>
+            </div>
+            <div class="col-md-8">
+              <label for="email" class="form-label">Role</label>
+              <select class="form-select" name="role" ngModel required>
+                <option value="{{role}}" *ngFor="let role of userRoles">{{ role | titlecase }}</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="branch" class="form-label">Branch</label>
+              <select class="form-select" name="branch" ngModel required>
+                <option value="{{branch}}" *ngFor="let branch of companyBranches"> {{ branch | uppercase}}</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="status" ngModel>
+                <label class="form-check-label" for="status">
+                  Is Active?
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary rounded-pill" data-bs-dismiss="modal"
+              [disabled]="!addForm.valid">Add Employee</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

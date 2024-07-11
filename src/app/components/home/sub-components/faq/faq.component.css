@@ -1,0 +1,62 @@
+.wrapper {
+    width: 100%;
+}
+
+/* CSS styles for breadcrumbs */
+.breadcrumb .breadcrumb-item{
+  font-size: 14px; 
+  font-weight: 500;
+}
+
+.breadcrumb-item a {
+    text-decoration: none;
+    color: #043a5cad;
+}
+
+.breadcrumb-item a:hover{
+  color: #0174bc;
+}
+
+
+/* # F.A.Q Page */
+.faq .card{
+  margin-bottom: 1.5rem;
+  border: none;
+  box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
+}
+
+.faq .card-title{
+  color: #043b5c;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.faq .basic h6 {
+    font-size: 18px;
+    font-weight: 300;
+    color: #4154f1;
+  }
+  
+  .faq .basic p {
+    color: #6980aa;
+    font-size: 15px;
+  }
+
+  .faq .accordion-header .accordion-button{
+    font-size: 15px;
+  }
+
+  .faq .accordion-header .accordion-button:focus{
+    box-shadow: none;
+    outline: none;
+  }
+
+  .faq .accordion-header .accordion-button:not(.collapsed){
+    background-color: inherit;
+    color: #4154f1;
+  }
+
+  .faq .accordion-body{
+    font-size: 15px;
+  }
+  

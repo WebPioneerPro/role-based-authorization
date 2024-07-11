@@ -1,0 +1,57 @@
+<div class="wrapper">
+    <div class="container main">
+        <div class="row">
+            <div class="col-md-6 left">
+              <img src="../../../assets/images/logo.png" alt="logo" style="filter: invert(1);">
+                <div class="input-box">
+                    <header>Create Account</header>
+                    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" [ngClass]="{'invalid-input':invalidCheck && registrationForm.get('name').invalid}" placeholder="Name" autocomplete="off" formControlName="name">
+                            <label for="name">Name</label>
+                            <p class="form-text text-danger" *ngIf="registrationForm.get('name').errors?.required && invalidCheck">Name is required</p>
+                          </div>
+                        <div class="form-floating mb-3">
+                          <input type="email" class="form-control" [ngClass]="{'invalid-input':invalidCheck && registrationForm.get('email').invalid}" placeholder="name@example.com" autocomplete="off" formControlName="email">
+                          <label for="email">Email address</label>
+                          <p class="form-text text-danger" *ngIf="registrationForm.get('email').errors?.required && invalidCheck">Email is required</p>
+                          <p class="form-text text-danger" *ngIf="registrationForm.get('email').errors?.email && invalidCheck">Invalid email</p>
+                        </div>
+                        <div class="form-floating">
+                          <input type="{{ passwordVisibility ? 'text' : 'password' }}" class="form-control" [ngClass]="{'invalid-input':invalidCheck && registrationForm.get('password').invalid}" placeholder="Password" autocomplete="off" formControlName="password">
+                          <label for="floatingPassword">Password</label>
+                          <p class="form-text text-danger" *ngIf="registrationForm.get('password').errors?.required && invalidCheck">Password is required</p>
+                        </div>
+                        <div class="form-check mt-2">
+                          <input class="form-check-input" type="checkbox" id="gridCheck" (change)="passwordVisibility = !passwordVisibility">
+                          <label class="form-check-label" for="gridCheck">
+                            Show Password
+                          </label>
+                        </div>
+                        <div class="input-field mt-4" *ngIf="!isLoading">
+                          <input type="submit" class="submit" value="Sign Up">
+                        </div>
+                        <div *ngIf="isLoading" class="text-center">
+                          <app-loading-spinner></app-loading-spinner>
+                        </div>
+                      </form>
+                    <div class="signin">
+                        <span>Already have an account? <a routerLink="/login">Log in here</a></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 side-image">
+
+
+                <!-------------      image     ------------->
+
+                <img src="../../../assets/images/logo.png" alt="logo">
+                <div class="text">
+                    <p>Join the community of developers <i>- mindleap</i></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+      
+</div>

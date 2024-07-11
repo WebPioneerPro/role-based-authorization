@@ -1,27 +1,75 @@
-# TaskOne
+# Role Based Authorization Project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.5.
+## Description
 
-## Development server
+This project is a Role Based Authorization system built using Angular and JSON Server. Users can sign up and log in, but new accounts require admin approval before they can log in. Admins have access to manage user details, while non-admin users do not have access to the Manage Users page. The project is divided into various subcomponents, uses routing and guards for navigation and security, and is fully responsive.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Features
 
-## Code scaffolding
+- User Sign Up and Login
+- Admin Approval for New Accounts
+- Role-Based Access Control
+- User Management by Admins
+- Routing and Guards for Secure Navigation
+- Responsive Design
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Technologies Used
 
-## Build
+- Angular
+- JSON Server
+- CSS for Bootstrap
+- Angular Material
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Installation
 
-## Running unit tests
+1. **Clone the repository:**
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+   ```sh
+   git clone https://github.com/WebPioneerPro/role-based-authorization.git
+    ```
+2. **Navigate to the project directory:**
 
-## Running end-to-end tests
+    ```sh
+    cd role-based-authorization
+    ```
+3. **Install the required dependencies:**
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+    ```sh
+    npm install
+    ```
+4. **Start the Angular application:**
 
-## Further help
+    ```sh
+    ng serve
+    ```
+5. **Start the JSON Server:**
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+    ```sh
+    npm run start-json-server
+    ```
+
+## Usage
+
+1. Open your browser and navigate to **http://localhost:4200**.
+2. Sign up for a new account.
+3. Wait for admin approval before logging in.
+4. Once approved, log in and use the application based on your role.
+
+## Test Admin Account
+
+Use the following credentials to log in as an admin for testing purposes:
+
+- Email: admin@example.com
+- Password: admin
+
+## Contributing
+
+This is a personal project and currently not open for contributions.
+
+## Contact
+
+For questions or support, you can reach me at prabhanjansahu5@gmail.com.
+
+## GitHub Profile
+
+Check out my other projects on [GitHub](https://github.com/WebPioneerPro).# role-based-authorization

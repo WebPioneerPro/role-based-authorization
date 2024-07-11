@@ -1,0 +1,63 @@
+.wrapper {
+    width: 100%;
+
+}
+
+/* CSS styles for breadcrumbs */
+.breadcrumb .breadcrumb-item {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.breadcrumb-item a {
+    text-decoration: none;
+    color: #043a5cad;
+}
+
+.breadcrumb-item a:hover {
+    color: #0174bc;
+}
+
+.card {
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
+}
+
+table {
+    width: 100%;
+}
+
+/* CSS for Modal */
+
+.modal .modal-dialog .modal-content {
+    background-color: #F6F5F2;
+}
+
+.modal .modal-dialog .modal-content .btn.btn-primary {
+    border: none;
+    outline: none;
+    background: rgba(37, 95, 156, 0.937);
+}
+
+.modal .modal-dialog .modal-content .btn.btn-primary:hover {
+    background: rgb(18, 58, 101);
+}
+
+.modal .modal-dialog .modal-content .btn.btn-danger {
+    border: none;
+    outline: none;
+    background-color: rgb(190, 58, 58);
+}
+
+.modal .modal-dialog .modal-content .btn.btn-danger:hover {
+    background-color: rgb(130, 39, 39);
+}
+
+@media only screen and (max-width: 500px) {
+    .card .above-table .button-container span {
+        display: none;
+    }
+}
+
+

@@ -1,0 +1,51 @@
+<div class="wrapper">
+  <div class="container main">
+    <div class="row">
+      <div class="col-md-6 side-image">
+
+        <!-------------      image     ------------->
+
+        <img src="../../../assets/images/logo.png" alt="logo">
+        <div class="text">
+          <p>Time to reconnect! Sign in to <i>- mindleap</i></p>
+        </div>
+
+      </div>
+
+      <div class="col-md-6 right">
+        <img src="../../../assets/images/logo.png" alt="logo" style="filter: invert(1);">
+        <div class="input-box">
+          <header>Welcome Back</header>
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="form-floating mb-3">
+              <input type="email" class="form-control" [ngClass]="{'invalid-input':invalidCheck && loginForm.get('email').invalid}" placeholder="name@example.com" autocomplete="off" formControlName="email">
+              <label for="email">Email address</label>
+              <p class="form-text text-danger" *ngIf="loginForm.get('email').errors?.required && invalidCheck">Email is required</p>
+              <p class="form-text text-danger" *ngIf="loginForm.get('email').errors?.email && invalidCheck">Invalid email</p>
+            </div>
+            <div class="form-floating">
+              <input type="{{ passwordVisibility ? 'text' : 'password' }}" class="form-control" [ngClass]="{'invalid-input':invalidCheck && loginForm.get('password').invalid}" placeholder="Password" autocomplete="off" formControlName="password">
+              <label for="floatingPassword">Password</label>
+              <p class="form-text text-danger" *ngIf="loginForm.get('password').errors?.required && invalidCheck">Password is required</p>
+            </div>
+            <div class="form-check mt-2">
+              <input class="form-check-input" type="checkbox" id="gridCheck" (change)="passwordVisibility = !passwordVisibility">
+              <label class="form-check-label" for="gridCheck">
+                Show Password
+              </label>
+            </div>
+            <div class="input-field mt-4" *ngIf="!isLoading">
+              <input type="submit" class="submit" value="Log In">
+            </div>
+            <div *ngIf="isLoading" class="text-center">
+              <app-loading-spinner></app-loading-spinner>
+            </div>
+          </form>
+          <div class="signin">
+            <span>Don't have an account? <a routerLink="/sign-up">Sign up here</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
